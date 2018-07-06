@@ -36,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/route/getVolleyData.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="76">
-              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="38" />
+              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -53,8 +53,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/route/getVolleyData.js" />
         <option value="$PROJECT_DIR$/www.js" />
+        <option value="$PROJECT_DIR$/route/getVolleyData.js" />
       </list>
     </option>
   </component>
@@ -145,15 +145,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1530879496304</updated>
-      <workItem from="1530879497725" duration="3344000" />
+      <workItem from="1530879497725" duration="3962000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3344000" />
+    <option name="totallyTimeSpent" value="3962000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24785195" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -201,7 +202,7 @@
     <entry file="file://$PROJECT_DIR$/route/getVolleyData.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="38" />
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
         </state>
       </provider>
     </entry>

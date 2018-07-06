@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/',(req, res)=>{
-    res.send({'soccerTeam':'arsenal'})
+   var groupName = req.params.groupName;
+   console.log(groupName);
 });
 
 module.exports = router;
