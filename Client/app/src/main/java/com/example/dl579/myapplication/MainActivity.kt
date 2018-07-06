@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.View
 
 class MainActivity : AppCompatActivity() {
-
+    var url = "https://localhost:3000/test"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
