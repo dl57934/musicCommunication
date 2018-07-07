@@ -4,16 +4,14 @@ const fs = require('fs');
 router.post('/',(req, res)=>{
    let groupName = req.body;
    let savePath = "./music/test.mp3";
-   console.log(toHexString(groupName['musicFile']));
-   fs.writeFile(savePath, toHexString(groupName['musicFile']) ,null, (err, data)=>{
+   console.log(groupName['musicFile'].toString(16));
 
-   });
    res.send({'soccerTeam':'Arsenal'})
 });
 
-toHexString = (byteArray)=>{
-    return Array.from(byteArray, function(byte) {
-        return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-    }).join('')
-};
+var hexChar = ["0", "1", "2", "3", "4", "5", "6", "7","8", "9", "A", "B", "C", "D", "E", "F"];
+
+function byteToHex(b) {
+    return hexChar[(b >> 4) & 0x0f] + hexChar[b & 0x0f];
+}
 module.exports = router;
