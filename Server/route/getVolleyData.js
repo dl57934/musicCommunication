@@ -5,17 +5,18 @@ const multiParty = require('multiparty');
 
 router.post('/',(req, res)=>{
    let payload = {
-      maxBytes:209715200,
-       output:'stream',
-       parse:false
+
    };
 
    let multiparty = require('multiparty');
-   let form = new multiparty.Form();
+   let form = new multiparty.Form({
+       autoFiles:false,
+       uploadDir: 'music',
+   });
 
    form.parse(req, (err, fields, files)=>{
       console.log(err);
-      console.log(fields);
+      console.log(files);
       console.log(files);
    });
 
