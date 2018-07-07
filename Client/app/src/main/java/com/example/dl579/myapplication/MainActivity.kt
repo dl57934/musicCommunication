@@ -15,23 +15,41 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.Manifest
+import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.*
+import java.io.File
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
     val MUSIC_REQUEST = 1
-    var bitmap =""
-    object file{
+    object fileInfo{
         var path:String? = null
+        var url:Uri? = null
     }
-
+    var url = "http://192.168.43.47:3000/test"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         permissonCheck()
+        button4.setOnClickListener{
+            runOnUiThread(Runnable {
+                okHttpRequest(File(fileInfo.path), object: Callback {
+                    override fun onFailure(call: Call?, e: IOException?) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onResponse(call: Call?, response: Response?) {
+                        Log.e("asdasd",response.toString())
+                    }
+
+                })
+            })
+        }
     }
-   fun sendMusic(v: View){
-        VolleyService.volleyFunctions(this, file.path)
-    }
+
+
+
     fun findMusic(v:View){
         var intent =  Intent(Intent.ACTION_PICK, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, MUSIC_REQUEST)
@@ -50,8 +68,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == MUSIC_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-            file.path = _getRealPathFromURI(this, data.data)
-            Log.e("getPath: ", file.path)
+            fileInfo.url = data.data
+            fileInfo.path = _getRealPathFromURI(this, data.data)
+            Log.e("getPath: ", fileInfo.path)
         }
     }
     private fun _getRealPathFromURI(context:Any, contentUri: Uri): String? {
@@ -61,5 +80,24 @@ class MainActivity : AppCompatActivity() {
         var colum_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
         cursor.moveToFirst()
         return cursor.getString(colum_index)
+    }
+    fun okHttpRequest(file: File, callback: Callback): Call? {
+
+        var client = OkHttpClient()
+        var body = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file",file.name, RequestBody.create(
+                        MediaType.parse(contentResolver.getType(fileInfo.url)),
+                        file
+                )).build()
+        Log.e("fileInfo", file.name)
+        var request = Request.Builder()
+                .url(url)
+                .post(body)
+                .build()
+            var call = client.newCall(request)
+            call.enqueue(callback)
+            return call
+
     }
 }
