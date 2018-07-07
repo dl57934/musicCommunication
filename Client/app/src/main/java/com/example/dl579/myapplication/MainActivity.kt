@@ -19,6 +19,7 @@ import android.Manifest
 
 class MainActivity : AppCompatActivity() {
     val MUSIC_REQUEST = 1
+    var bitmap =""
     object file{
         var path:String? = null
     }
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         permissonCheck()
     }
    fun sendMusic(v: View){
-        VolleyService.volleyFuctions(this, file.path)
+        VolleyService.volleyFunctions(this, file.path)
     }
     fun findMusic(v:View){
         var intent =  Intent(Intent.ACTION_PICK, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI)
