@@ -16,11 +16,14 @@ router.post('/',(req, res)=>{
 
    form.parse(req, (err, fields, files)=>{
       console.log(err);
-      console.log(files);
-      console.log(files);
-   });
+      let folderName = files['audio'][0]['path'].substr(0,5);
+      let fileName =  files['audio'][0]['path'].substr(6);
 
-   console.log(req.body);
+      fs.rename(folderName+'/'+fileName,folderName+'/'+files['audio'][0]['originalFilename'],(error)=>{
+          console.log(error);
+      });
+       console.log();
+   });
    res.send({'soccerTeam':'Arsenal'})
 });
 
