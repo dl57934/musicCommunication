@@ -8,11 +8,11 @@ app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb',extended: true}));
-createModel();
 app.use('/upload', volleyRouter);
 app.set('port', 3000);
-
+let DBInfo = new createModel();
 
 http.createServer(app).listen(app.get('port'),()=>{
-   console.log('포트 3000에 연결')
+   console.log('포트 3000에 연결');
+   DBInfo.connectDB();
 });
