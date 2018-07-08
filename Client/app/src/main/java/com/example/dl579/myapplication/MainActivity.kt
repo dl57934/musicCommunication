@@ -21,8 +21,7 @@ import java.io.File
 import java.io.IOException
 import okhttp3.RequestBody
 import okhttp3.MultipartBody
-
-
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         var url: Uri? = null
     }
 
-    var url = "http://192.168.43.47:3000/test"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -100,17 +98,37 @@ class MainActivity : AppCompatActivity() {
         )
         Log.e("url: ",contentResolver.getType(fileInfo.url))
         Log.e("name ", file.toString())
+        var groupName = JSONObject()
+        groupName.put("groupName", "maroon5 Fans")
         // MultipartBody.Part is used to send also the actual file name
-        val body = MultipartBody.Part.createFormData("audio", file.name, requestFile)
-
+        val body1 = MultipartBody.Part.createFormData("audio", file.name, requestFile)
+        val body2 = MultipartBody.Part.createFormData("text", groupName.toString())
         // add another part within the multipart request
         val descriptionString = "hello, this is description speaking"
         val description = RequestBody.create(
                 okhttp3.MultipartBody.FORM, descriptionString)
-
+        var array = arrayListOf<MultipartBody.Part>()
+        array.add(body1)
+        array.add(body2)
         // finally, execute the request
-        val call = service.upload(description, body)
-        call.enqueue(object:retrofit2.Callback<ResponseBody> {
+        val call1 = service.upload(
+                description,
+                body1
+        )
+        val call2 = service.upload(
+                description,
+                body2
+        )
+        call1.enqueue(object:retrofit2.Callback<ResponseBody> {
+            override fun onFailure(call: retrofit2.Call<ResponseBody>?, t: Throwable?) {
+                Log.e("Upload error:", t!!.message.toString())
+            }
+
+            override fun onResponse(call: retrofit2.Call<ResponseBody>?, response: retrofit2.Response<ResponseBody>?) {
+                Log.e("Upload", "success")
+            }
+        })
+        call2.enqueue(object:retrofit2.Callback<ResponseBody> {
             override fun onFailure(call: retrofit2.Call<ResponseBody>?, t: Throwable?) {
                 Log.e("Upload error:", t!!.message.toString())
             }
