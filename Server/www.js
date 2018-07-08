@@ -1,14 +1,14 @@
-
-const logger = require('morgan');
-let express = require('express');
-let app = express();
 const http = require('http');
+let express = require('express');
+const logger = require('morgan');
 const volleyRouter = require('./route/getVolleyData');
+const createModel = require('./model/connectMongoDB');
 const bodyParser = require('body-parser');
 app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb',extended: true}));
+createModel();
 app.use('/upload', volleyRouter);
 app.set('port', 3000);
 

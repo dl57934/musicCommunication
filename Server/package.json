@@ -12,6 +12,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "http-errors": "^1.6.3",
+    "mongoose": "^5.2.1",
     "morgan": "^1.9.0",
     "multiparty": "^4.1.4"
   }
