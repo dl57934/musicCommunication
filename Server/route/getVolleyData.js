@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const authMusic = require('../model/authMusic');
+const createModel = require('../model/connectMongoDB');
+let DBInfo = new createModel();
+DBInfo.connectDB();
+let model = DBInfo.createSchema();
 
 router.post('/',(req, res)=>{
    let multiparty = require('multiparty');
@@ -18,8 +22,8 @@ router.post('/',(req, res)=>{
       fs.rename(folderName+'/'+fileName,folderName+'/'+files['audio'][0]['originalFilename'],(error)=>{
           console.log(error);
       });
-       console.log(files);
-       authMusic(files);
+       let gsf = DBInfo.createGridFs();
+       authMusic(files, gsf, model);
    });
    res.send({'soccerTeam':'Arsenal'})
 });

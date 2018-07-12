@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
-
+let database;
 
 class DBInfo {
 
-    connectDB(){
+    connectDB() {
         const databaseUrl = 'mongodb://localhost:27017/local';
-
         console.log('데이터 베이스 연결을 시도합니다.');
-        let database = mongoose.connection;
+        database = mongoose.connection;
         mongoose.connect(databaseUrl);
         database.on('error', console.error.bind(console, 'mongoose connection error.'));
         database.on('open', () => {
@@ -18,17 +17,22 @@ class DBInfo {
             setInterval(mongoose.connect(databaseUrl), 5000);
         });
     };
-    createSchema(){
+
+    createSchema() {
         let userSchema = mongoose.Schema({
-            music: {type:String,required: true, unique: true},
-            create_at: Date,
-            update_at: Date
+            musicName: {type: String},
+            creator: {type: String},
+            musicFile: [mongoose.Schema.Types.Mixed],
         });
 
-        console.log("UserModel 정의함");
         return mongoose.model("musicWithGroup", userSchema);
     };
-
+    createGridFs() {
+        let gridFs = require('gridfs-stream');
+        gridFs.mongo = mongoose.mongo;
+        let gfs = gridFs(database.db);
+        return gfs;
+    }
 }
 
 module.exports = DBInfo;
