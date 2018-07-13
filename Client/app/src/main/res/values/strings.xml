@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="sendButton">전송</string>
+    <string name="findSong">노래찾기</string>
+    <string name="recordVoice">Button</string>
+    <string name="recordVoide">녹음하기</string>
+    <string name="recordMusicPlay">녹음된 음악 재생</string>
+    <string name="StopMusic">녹음된 음악 멈춤</string>
+    <string name="StopRecorder">녹음중단</string>
 </resources>

@@ -15,28 +15,34 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.Manifest
+import android.media.MediaPlayer
+import android.media.MediaRecorder
+import android.os.Environment
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.File
 import java.io.IOException
 import okhttp3.RequestBody
 import okhttp3.MultipartBody
-import org.json.JSONObject
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    val MUSIC_REQUEST = 1
-
+    private val MUSIC_REQUEST = 1
+    private var recorder:MediaRecorder? = null
     object fileInfo {
         var path: String? = null
         var url: Uri? = null
     }
-
+    private var mpath:String = ""
+    private var media:MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         permissonCheck()
-        button4.setOnClickListener {
+        recorder = MediaRecorder()
+
+        sendMusic.setOnClickListener {
             runOnUiThread(Runnable {
                 okHttpRequest(File(fileInfo.path), object : Callback {
                     override fun onFailure(call: Call?, e: IOException?) {
@@ -50,8 +56,53 @@ class MainActivity : AppCompatActivity() {
                 })
             })
         }
+        startRecorder.setOnClickListener {
+                initRecorder()
+                recorder!!.prepare()
+                recorder!!.start()
+
+                play.isEnabled = false
+                musicStopButton.isEnabled = false
+        }
+        RecorderStop.setOnClickListener {
+            recorder!!.stop()
+            play.isEnabled = true
+            startRecorder.isEnabled = true
+            RecorderStop.isEnabled = false
+            musicStopButton.isEnabled = false
+        }
+        play.setOnClickListener {
+            RecorderStop.isEnabled = false
+            musicStopButton.isEnabled = true
+            startRecorder.isEnabled = false
+            media = MediaPlayer()
+            media!!.setDataSource(mpath)
+            media!!.prepare()
+            media!!.start()
+        }
+        musicStopButton.setOnClickListener {
+            play.isEnabled = true
+            startRecorder.isEnabled = true
+            RecorderStop.isEnabled = false
+            musicStopButton.isEnabled = false
+            if (media != null){
+                media!!.stop()
+                media!!.release()
+                initRecorder()
+            }
+
+        }
     }
 
+    fun initRecorder(){
+        recorder!!.reset()
+        recorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
+        recorder!!.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        recorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        mpath = Environment.getExternalStorageDirectory().absolutePath+"/"+UUID.randomUUID().toString()+"_audio_record.3gp"
+        recorder!!.setOutputFile(mpath)
+        Log.e("path ",mpath)
+    }
 
     fun findMusic(v: View) {
         var intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI)
@@ -59,13 +110,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun permissonCheck() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        var ReadStoragetPermmission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        var ReadAudioPermmission = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+        var WriteStorage= ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ReadAudioPermmission != PackageManager.PERMISSION_GRANTED && ReadStoragetPermmission != PackageManager.PERMISSION_GRANTED &&
+                WriteStorage != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
             } else {
                 ActivityCompat.requestPermissions(this,
-                        arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE),
-                        1)
+                        arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        1000)
             }
         }
     }
