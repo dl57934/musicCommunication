@@ -22,7 +22,7 @@ app.use('/', index);
 
 
 http.createServer(app).listen(8000, ()=>{
-    console.log('3000에 연결되었다.');
+    console.log('8000에 연결되었다.');
     console.log(__dirname);
 });
 

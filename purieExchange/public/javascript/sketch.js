@@ -1,7 +1,10 @@
  preload = ()=> {
-    sound = loadSound('../music/001 연애시대 (Feat. Ra.D) (Narr. 한효주)-이승기.mp3');
-    sound1 = loadSound('../music/_Digimon OST_ Butterfly - Fingerstyle Guitar Cover.mp3');
+   let scripts = document.getElementsByTagName('script');
+   let lastScripts = scripts[scripts.length-1];
+   console.log(lastScripts);
+    sound = loadSound('../music/_Digimon OST_ Butterfly - Fingerstyle Guitar Cover.mp3');
   }
+
   
 setup=()=>{
   var cnv = createCanvas(64*160,300);
@@ -10,7 +13,6 @@ setup=()=>{
     fft = new p5.FFT(0.9, 16);
     w = width/3072
     sound.amp(0.5);
-    sound1.amp(0.5);
     background(0);
   }
   let addWidth = 0;
@@ -30,7 +32,6 @@ setup=()=>{
         y16= totalY/16;
         if(y16 != 0){
         rect(addWidth, y16, w-2, height - y16);
-        console.log(height-y16);
         addWidth += 3;
         }
       }
