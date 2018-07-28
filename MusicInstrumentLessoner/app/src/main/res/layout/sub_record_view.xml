@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,17 +9,85 @@
     tools:context=".recordActivity"
     android:background="@color/colorMainBackGround">
 
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="fill_parent"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="76dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.917"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+    <Button
+        android:id="@+id/recordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="136dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/startRecord"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/seperator"
         app:srcCompat="@drawable/seperator" />
 
-    <FrameLayout
-        android:id="@+id/flFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <Button
+        android:id="@+id/stopRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="136dp"
+        android:layout_marginStart="52dp"
+        android:text="@string/stopRecord"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/recordButton"
+        tools:ignore="MissingConstraints" />
 
-    </FrameLayout>
+    <Button
+        android:id="@+id/saveRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="136dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/stopRecord"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-</LinearLayout>
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="244dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/savingFIleName"
+        app:layout_constraintBottom_toTopOf="@+id/stopRecord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.84" />
+
+</android.support.constraint.ConstraintLayout>
