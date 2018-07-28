@@ -145,8 +145,6 @@ class MainActivity : AppCompatActivity() {
 
     fun okHttpRequest(file: File, callback: Callback) {
         val service = ServiceGenerator.createService(FileUploadService::class.java)
-
-
         val requestFile = RequestBody.create(
                 MediaType.parse(contentResolver.getType(fileInfo.url)),
                 file

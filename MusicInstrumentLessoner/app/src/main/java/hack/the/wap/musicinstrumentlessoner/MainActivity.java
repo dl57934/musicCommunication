@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setUserNameAndEmail();
-        Log.e("asdasd","asdasd");
         fab = findViewById(R.id.fab);
         fab1 = findViewById(R.id.fab1);
         fab2 = findViewById(R.id.fab2);
@@ -184,10 +183,8 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.flFragment, notificationFragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_template) {
-            FragmentManager fm = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.flFragment, templateFragment);
-            fragmentTransaction.commit();
+            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, 1);
         } else if (id == R.id.nav_group) {
 
         } else if (id == R.id.nav_store) {

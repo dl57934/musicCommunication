@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hack.the.wap.musicinstrumentlessoner">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.STORAGE" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -29,7 +31,8 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/MainAppTheme" />
-        <activity android:name=".recordActivity"></activity>
+        <activity android:name=".recordActivity" />
+        <activity android:name=".addGroup"></activity>
     </application>
 
 </manifest>
