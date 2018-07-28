@@ -4,7 +4,6 @@ const fs = require('fs');
 const authMusic = require('../model/authMusic');
 const createModel = require('../model/connectMongoDB');
 let DBInfo = new createModel();
-DBInfo.connectDB();
 let model = DBInfo.createSchema();
 
 router.post('/',(req, res)=>{

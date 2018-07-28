@@ -18,7 +18,7 @@ import java.io.*
 
 
 object VolleyService {
-    var url = "http://172.30.1.9:3000/test"
+    var url = "http://172.30.1.9a:3000/test"
     fun volleyFunctions(context:Context, path:String?) {
         var queue = Volley.newRequestQueue(context)
         var sendData = JSONObject()

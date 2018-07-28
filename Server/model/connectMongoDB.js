@@ -27,6 +27,26 @@ class DBInfo {
 
         return mongoose.model("musicWithGroup", userSchema);
     };
+    createUserSchema(){
+        const userSchema = mongoose.Schema({
+            id:{type:String, required:true, unique:true},
+            password:{type:String, required:true},
+            groupName:{type:String, unique:true}
+        });
+        userSchema.static('findById', (id, callback)=>{
+            return this.find({id:id}, calback);
+        });
+        return mongoose.model("userInfo", userSchema);
+    }
+    createGroupSchema(){
+        const groupSchema = mongoose.Schema({
+            groupName:{type:String, required:true, unique:true},
+            groupMember:{type:String},
+            groupExplanation:{type:String},
+            musicName:{type:String}
+        });
+        return mongoose.model("groupInfo", groupSchema);
+    }
     createGridFs() {
         let gridFs = require('gridfs-stream');
         gridFs.mongo = mongoose.mongo;
