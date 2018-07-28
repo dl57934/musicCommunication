@@ -17,6 +17,7 @@ import android.widget.Toast
 
 class recordActivity : AppCompatActivity() {
     internal var recorder: MediaRecorder? = null
+    var checkInitRecorder = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
@@ -42,12 +43,13 @@ class recordActivity : AppCompatActivity() {
             stopRecord!!.isEnabled = false
             saveRecord!!.isEnabled = false
             chronometer.stop()
+            chronometer.base = SystemClock.elapsedRealtime()
         }
-        saveRecord!!.setOnClickListener{
+        /*saveRecord!!.setOnClickListener{
             chronometer.base = SystemClock.elapsedRealtime()
             var fileName = editText.text.toString()
-//            saveRecorder(fileName)
-        }
+            saveRecorder(fileName)
+        }*/
     }
 
     private fun initRecorder(fileName:String) {
@@ -62,20 +64,12 @@ class recordActivity : AppCompatActivity() {
         recorder!!.setOutputFile(mpath)
     }
 
+
     private fun saveRecorder(fileName:String){
         var file = Environment.getExternalStorageDirectory()
         var path = file.absolutePath+"/"
         val mpath = "$path$fileName.mp3"
-        if(fileName != null){
-            recorder!!.setOutputFile(mpath)
-            Log.e("path ", mpath)
-            recorder!!.stop()
-            recorder!!.release()
-            recorder!!.reset()
-
-        }else{
-            Toast.makeText(this, "file 이름을 지정해주세요.", Toast.LENGTH_LONG)
-        }
-
+        Log.e("path", mpath)
+        recorder!!.setOutputFile(mpath)
     }
 }
