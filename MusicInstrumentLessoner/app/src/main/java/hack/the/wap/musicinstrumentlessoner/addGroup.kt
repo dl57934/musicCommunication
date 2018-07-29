@@ -10,17 +10,33 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import org.json.JSONObject
 
 class addGroup : AppCompatActivity() {
     lateinit var ImageView:ImageView
+    lateinit var addGroupButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add__group)
-       ImageView = findViewById<ImageView>(R.id.groupImage)
+        var jsonData = JSONObject()
+        var groupName = findViewById<EditText>(R.id.groupName)
+        var multiText = findViewById<EditText>(R.id.multiLineText)
+        ImageView = findViewById<ImageView>(R.id.groupImage)
+        addGroupButton = findViewById<Button>(R.id.addGroupButton)
+        jsonData.put("groupName", groupName.text)
+        jsonData.put("multiText", multiText.text)
+        jsonData.put("Image", ImageView.resources)
+        jsonData.put("member", "dl57934")
+        addGroupButton.setOnClickListener {
+        Log.e("logData", jsonData.toString())
+        var volley = VolleyService
+            volley.volleyFunctions(this,jsonData,"addGroup")
+        }
     }
     fun addImage(v: View){
         var intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

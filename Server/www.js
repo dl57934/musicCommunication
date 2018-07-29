@@ -3,6 +3,7 @@ let express = require('express');
 const logger = require('morgan');
 const volleyRouter = require('./route/getVolleyData');
 const relativeRouter = require('./route/addUser');
+const addGroup = require('./route/addGroup');
 const createModel = require('./model/connectMongoDB');
 const bodyParser = require('body-parser');
 let DbInfo = new createModel();
@@ -13,6 +14,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb',extended: true}));
 app.use('/upload', volleyRouter);
 app.use('/addMember',relativeRouter);
+app.use('/addGroup', addGroup);
 app.set('port', 3000);
 
 

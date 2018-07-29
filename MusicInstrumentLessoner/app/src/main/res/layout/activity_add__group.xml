@@ -42,15 +42,16 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
+        android:contentDescription="TODO"
         android:onClick="addImage"
         android:src="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintBottom_toTopOf="@+id/groupName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.322"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738"
-        tools:ignore="MissingConstraints,OnClick"
-        android:contentDescription="TODO" />
+        app:layout_constraintVertical_bias="0.829"
+        tools:ignore="MissingConstraints,OnClick" />
 
     <TextView
         android:id="@+id/textView9"
@@ -61,13 +62,13 @@
         android:layout_marginTop="304dp"
         android:text="그룹이름"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText3"
+        app:layout_constraintEnd_toStartOf="@+id/groupName"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/groupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -83,22 +84,22 @@
         android:layout_width="83dp"
         android:layout_height="34dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"
         android:text="그룹설명"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editText4"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintEnd_toStartOf="@+id/multiLineText"
+        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText4"
-        android:layout_width="223dp"
-        android:layout_height="153dp"
+        android:id="@+id/multiLineText"
+        android:layout_width="224dp"
+        android:layout_height="91dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="32dp"
@@ -106,7 +107,21 @@
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/groupName"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/addGroupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="그룹 만들기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multiLineText" />
 
 </android.support.constraint.ConstraintLayout>

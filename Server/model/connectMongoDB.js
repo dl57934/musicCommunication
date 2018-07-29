@@ -45,6 +45,9 @@ class DBInfo {
             groupExplanation:{type:String},
             musicName:{type:String}
         });
+        groupSchema.static('findById', (id, callback)=>{
+            return this.find({id:id}, callback)
+        })
         return mongoose.model("groupInfo", groupSchema);
     }
     createGridFs() {
