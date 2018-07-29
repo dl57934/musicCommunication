@@ -5,7 +5,10 @@ import android.content.Context
 import android.content.CursorLoader
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.media.Image
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -28,12 +31,15 @@ class addGroup : AppCompatActivity() {
         var multiText = findViewById<EditText>(R.id.multiLineText)
         ImageView = findViewById<ImageView>(R.id.groupImage)
         addGroupButton = findViewById<Button>(R.id.addGroupButton)
-        jsonData.put("groupName", groupName.text)
-        jsonData.put("multiText", multiText.text)
-        jsonData.put("Image", ImageView.resources)
-        jsonData.put("member", "dl57934")
+
+
         addGroupButton.setOnClickListener {
-        Log.e("logData", jsonData.toString())
+            var drawble:BitmapDrawable = ImageView.drawable as BitmapDrawable
+            Log.e("logData", jsonData.toString())
+            jsonData.put("groupName", groupName.text)
+            jsonData.put("multiText", multiText.text)
+            jsonData.put("Image", drawble.bitmap)
+            jsonData.put("member", "dl57934")
         var volley = VolleyService
             volley.volleyFunctions(this,jsonData,"addGroup")
         }
