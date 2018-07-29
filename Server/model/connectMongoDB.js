@@ -43,7 +43,8 @@ class DBInfo {
             groupName:{type:String, required:true, unique:true},
             groupMember:{type:String},
             groupExplanation:{type:String},
-            musicName:{type:String}
+            musicName:{type:String},
+            Image:{type:String}
         });
         groupSchema.static('findById', (id, callback)=>{
             return this.find({id:id}, callback)

@@ -37,9 +37,10 @@ class addGroup : AppCompatActivity() {
             var drawble:BitmapDrawable = ImageView.drawable as BitmapDrawable
             Log.e("logData", jsonData.toString())
             jsonData.put("groupName", groupName.text)
-            jsonData.put("multiText", multiText.text)
+            jsonData.put("groupExplanation", multiText.text)
             jsonData.put("Image", drawble.bitmap)
-            jsonData.put("member", "dl57934")
+            jsonData.put("groupMember", "dl57934")
+            jsonData.put("musicName","")
         var volley = VolleyService
             volley.volleyFunctions(this,jsonData,"addGroup")
         }
