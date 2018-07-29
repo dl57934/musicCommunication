@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
     private Animation fab_open, fab_close;
     private boolean isFabOpen = false;
     FloatingActionButton fab, fab1, fab2, fab3;
-    private Intent recordIntent;
+    private Intent recordIntent, addGroup;
     /*
      * Initial Block
      */ {
@@ -109,7 +109,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.fab2:
                 anim();
-                Toast.makeText(this, "Button2", Toast.LENGTH_SHORT).show();
+                addGroup = new Intent(MainActivity.this, addGroup.class);
+                startActivity(addGroup);
                 break;
             case R.id.fab3:
                 anim();
